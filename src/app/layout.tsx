@@ -14,18 +14,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-background">
-        <header className="bg-primary text-primary-foreground shadow-lg">
-          <div className="container mx-auto px-4 py-6 flex justify-between items-center">
-            <Link href="/" className="text-3xl font-bold hover:text-accent transition-colors duration-200">
-              Chromatic Chronicles
-            </Link>
-            <nav>
-              <ul className="flex space-x-6">
-                <li><Link href="/" className="hover:text-accent transition-colors duration-200">Home</Link></li>
-                <li><Link href="#" className="hover:text-accent transition-colors duration-200">About</Link></li>
-                <li><Link href="#" className="hover:text-accent transition-colors duration-200">Contact</Link></li>
-              </ul>
-            </nav>
+      <link rel="icon" type="image/svg+xml" href="/static/images/blog.svg" />
+        <header className="bg-primary text-primary-foreground shadow-lg bg-black">
+          <div className="container mx-auto px-4 py-6">
+            <div className="flex justify-between items-center">
+              <Link href="/" className="text-3xl font-bold hover:text-accent transition-colors duration-200 text-white">
+                Chromatic Chronicles
+              </Link>
+              <nav>
+                <ul className="flex space-x-6">
+                  <li><Link href="/" className="hover:text-accent transition-colors duration-200 text-white">Home</Link></li>
+                  <li><Link href="/about" className="hover:text-accent transition-colors duration-200 text-white">About</Link></li>
+                  <li><Link href="/contact" className="hover:text-accent transition-colors duration-200 text-white">Contact</Link></li>
+                </ul>
+              </nav>
+            </div>
           </div>
         </header>
         <main className="flex-grow">
@@ -42,8 +45,8 @@ export default function RootLayout({
                 <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
                 <ul className="space-y-2">
                   <li><Link href="/" className="hover:text-accent transition-colors duration-200">Home</Link></li>
-                  <li><Link href="#" className="hover:text-accent transition-colors duration-200">About</Link></li>
-                  <li><Link href="#" className="hover:text-accent transition-colors duration-200">Contact</Link></li>
+                  <li><Link href="/about" className="hover:text-accent transition-colors duration-200">About</Link></li>
+                  <li><Link href="/contact" className="hover:text-accent transition-colors duration-200">Contact</Link></li>
                 </ul>
               </div>
               <div>
@@ -56,7 +59,7 @@ export default function RootLayout({
               </div>
             </div>
             <div className="mt-8 pt-8 border-t border-secondary-foreground/20 text-center">
-              © 2023 Chromatic Chronicles. All rights reserved.
+              © {new Date().getFullYear()} Chromatic Chronicles. All rights reserved.
             </div>
           </div>
         </footer>

@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { useState } from "react";
 
 const blogPosts = {
   1: {
@@ -17,6 +19,8 @@ const blogPosts = {
 
     Understanding color theory allows designers to create balanced, harmonious, and impactful visual experiences. It's an essential skill in fields such as graphic design, interior design, fashion, and digital media.`,
     image: "/static/images/vibrant_world.webp",
+    likes: 120,
+    views: 500,
   },
   2: {
     title: "Exploring the Depths of Blue",
@@ -30,6 +34,8 @@ const blogPosts = {
 
     The versatility of blue in design is remarkable. Lighter shades can evoke feelings of freshness and tranquility, while darker shades can represent professionalism and stability. This makes blue a popular choice in various design contexts, from website design to product packaging.`,
     image: "/static/images/dept_of_blue.jpeg",
+    likes: 150,
+    views: 40,
   },
   3: {
     title: "The Power of Red in Branding",
@@ -46,6 +52,8 @@ const blogPosts = {
 
     Successful use of red in branding requires a deep understanding of the target audience, cultural context, and the brand's personality. When used effectively, red can create a powerful and memorable brand identity that resonates with consumers on an emotional level.`,
     image: "/static/images/red_branding.jpeg",
+    likes: 110,
+    views: 530,
   },
   4: {
     title: "Green Living: More Than a Color",
@@ -70,6 +78,8 @@ const blogPosts = {
 
     As we face growing environmental challenges, the concept of green living continues to evolve. It's no longer just about individual choices, but also about systemic changes in how we produce, consume, and dispose of goods. The color green serves as a constant reminder of our connection to the planet and our responsibility to protect it for future generations.`,
     image: "/static/images/green.jpeg",
+    likes: 121,
+    views: 40,
   },
   5: {
     title: "The Psychology of Yellow",
@@ -98,6 +108,8 @@ const blogPosts = {
 
     Understanding the psychology of yellow can be valuable in various fields, from design and marketing to therapy and education. By harnessing its attention-grabbing and mood-lifting properties, we can create environments and experiences that positively influence cognition and emotion.`,
     image: "/static/images/yellow.webp",
+    likes: 1000,
+    views: 900,
   },
   6: {
     title: "Purple Reign: The Color of Royalty",
@@ -135,14 +147,19 @@ const blogPosts = {
 
     The "reign" of purple as a symbol of status has transformed over the centuries, but its associations with luxury, creativity, and spirituality remain strong. Understanding the rich history and psychological impact of purple can inform its effective use in design, marketing, and personal expression.`,
     image: "/static/images/purple.jpeg",
+    likes: 177,
+    views: 555,
   },
 };
-
 export default function BlogPost({ params }: { params: { id: string } }) {
   const post = blogPosts[params.id as unknown as keyof typeof blogPosts];
   if (!post) {
     notFound();
   }
+  const [isLiked, setIsLiked] = useState(false);
+  const toggleLike = () => {
+    setIsLiked((prev) => !prev);
+  };
   return (
     <article className="container mx-auto px-4 py-12 animate-slideIn">
       <div className="max-w-3xl mx-auto bg-card rounded-lg shadow-lg overflow-hidden">
@@ -161,6 +178,35 @@ export default function BlogPost({ params }: { params: { id: string } }) {
                 {paragraph}
               </p>
             ))}
+          </div>
+          <div className="flex items-center text-sm text-gray-600 gap-2">
+          <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill={isLiked ? "red" : "currentColor"}
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              className="mr-1 cursor-pointer"
+              onClick={toggleLike}
+            >
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.01 4.01 4 6.5 4c1.74 0 3.41 1.01 4.22 2.78C11.09 5.01 12.76 4 14.5 4 16.99 4 19 6.01 19 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            <span>{post.likes + (isLiked ? 1 : 0)} Likes</span>{" "}
+          </div>
+          <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              className="mr-1 text-gray-500"
+            >
+              <path d="M12 5c-7.73 0-11.92 7.06-12 7.14-.12.18-.12.54 0 .72.08.08 4.27 7.14 12 7.14s11.92-7.06 12-7.14c.12-.18.12-.54 0-.72-.08-.08-4.27-7.14-12-7.14zm0 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+            </svg>
+            <span>{post.views}</span>
+          </div>
           </div>
         </div>
       </div>
